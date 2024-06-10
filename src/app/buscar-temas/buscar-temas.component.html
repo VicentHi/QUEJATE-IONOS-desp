@@ -1,0 +1,39 @@
+<h1>buscar por temas</h1>
+
+<br />
+
+<select style="width: 200px" (change)="seleccionarTema($event)">
+  <option value="" disabled selected>Selecciona un tema</option>
+  <option *ngFor="let tema of temas" [value]="tema.tema_nombre">
+    {{ tema.tema_nombre }}
+  </option>
+</select>
+
+<br /><br />
+
+<h2>{{ temaSeleccionado }}</h2>
+
+<div class="container" *ngIf="data && data.length > 0">
+
+  <div
+    *ngFor="let item of data | paginate : { itemsPerPage: 5, currentPage: p }"
+  >
+    <h4><span class="gris">De: </span>{{ item.alias }}</h4>
+    <p><span class="gris">A: </span>{{ item.nombre_institucion }}</p>
+    <hr />
+    <p>{{ item.descripcion }}</p>
+    <hr />
+    <p>{{ item.fechapresentacion | date : "dd-MM-yyyy" }}</p>
+    <br /><br />
+  </div>
+
+  <pagination-controls
+    (pageChange)="p = $event"
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+  ></pagination-controls>
+</div>
+
+<div class="container" *ngIf="hayResultados && (!data || data.length === 0)">
+  <p><br />No se encontraron resultados.</p>
+</div>

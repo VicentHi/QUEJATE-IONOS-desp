@@ -1,0 +1,23 @@
+<h1>quejas realizadas</h1>
+
+<div
+  class="container"
+  *ngFor="let item of data | paginate : { itemsPerPage: 5, currentPage: p }"
+>
+  <h2>{{ item.titulo }}</h2>
+  <h4><span class="gris">De: </span>{{ item.alias }}</h4>
+  <p><span class="gris">A: </span>{{ item.nombre_institucion }}</p>
+  <hr />
+  <p>{{ item.descripcion }}</p>
+  <hr />
+  <!--<p>{{ item.fechapresentacion | date:'dd-MM-yyyy HH:mm:ss':'Europe/Madrid' }}</p>-->
+  <p>{{ item.fechapresentacion | date : "dd-MM-yyyy" }}</p>
+  <br /><br />
+</div>
+
+<pagination-controls
+  (pageChange)="p = $event"
+  previousLabel="Anterior"
+  nextLabel="Siguiente"
+>
+</pagination-controls>

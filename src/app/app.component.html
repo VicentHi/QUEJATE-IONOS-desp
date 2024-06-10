@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<div class="router-content">
+<router-outlet></router-outlet>
+</div>
+
+<app-queja *ngIf="isHomePage()"></app-queja>
+
+<app-ultimas-quejas *ngIf="isHomePage()"></app-ultimas-quejas>
+
+<app-footer></app-footer>
+
+
+
+
+

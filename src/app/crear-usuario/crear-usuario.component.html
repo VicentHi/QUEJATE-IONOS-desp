@@ -1,0 +1,318 @@
+<div class="container">
+  <fieldset>
+    <h3>Registrar usuario</h3>
+
+    <form [formGroup]="formularioUsuario" (ngSubmit)="onSubmit()">
+      <table>
+        <tr>
+          <td>
+            <label for="dni">DNI <span>*</span>:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              formControlName="dni"
+              id="dni"
+              (focus)="borrarMensajes()"
+            />
+            <div
+              *ngIf="
+                formularioUsuario.get('dni')?.touched &&
+                formularioUsuario.get('dni')?.invalid
+              "
+            >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('dni')?.errors?.['required']"
+                >* Inserta DNI</small
+              >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('dni')?.errors?.['dniInvalido']"
+                >* El DNI debe tener 8 números seguidos de 1 letra</small
+              >
+              <small class="text-error" *ngIf="dniRegistrado"
+                >* El DNI ya está registrado.</small
+              >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="nombre">Nombre <span>*</span>:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              formControlName="nombre"
+              id="nombre"
+              pattern="[A-Za-z0-9\s]+"
+            />
+            <div
+              *ngIf="
+                formularioUsuario.get('nombre')?.touched &&
+                formularioUsuario.get('nombre')?.invalid
+              "
+            >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('nombre')?.errors?.['required']"
+                >* Inserta nombre.
+              </small>
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('nombre')?.errors?.['minlength']"
+                >* El nombre debe tener al menos 3 caracteres.
+              </small>
+              <small
+                class="text-error"
+                *ngIf="
+                  formularioUsuario.get('nombre')?.invalid &&
+                  formularioUsuario.get('nombre')?.touched
+                "
+              >
+                * Por favor, ingresa solo letras, números y espacios en
+                blanco.</small
+              >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="apellido">Apellido <span>*</span>:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              formControlName="apellido"
+              id="apellido"
+              pattern="[A-Za-z0-9\s]+"
+            />
+            <div
+              *ngIf="
+                formularioUsuario.get('apellido')?.touched &&
+                formularioUsuario.get('apellido')?.invalid
+              "
+            >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('apellido')?.errors?.['required']"
+                >* Inserta apellido.
+              </small>
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('apellido')?.errors?.['minlength']"
+                >* El apellido debe tener al menos 3 caracteres.
+              </small>
+              <small
+                class="text-error"
+                *ngIf="
+                  formularioUsuario.get('apellido')?.invalid &&
+                  formularioUsuario.get('apellido')?.touched
+                "
+                >* Por favor, ingresa solo letras, números y espacios en
+                blanco.</small
+              >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="correo">Correo electrónico <span>*</span>:</label>
+          </td>
+          <td>
+            <input type="email" formControlName="correo" id="correo" />
+            <div
+              *ngIf="
+                formularioUsuario.get('correo')?.touched &&
+                formularioUsuario.get('correo')?.invalid
+              "
+            >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('correo')?.errors?.['required']"
+                >* Inserta correo</small
+              >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('correo')?.errors?.['email']"
+                >* Formato de correo electrónico inválido</small
+              >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="username">Nombre de usuario <span>*</span>:</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              formControlName="username"
+              id="username"
+              pattern="[A-Za-z0-9\s]+"
+            />
+            <div
+              *ngIf="
+                formularioUsuario.get('username')?.touched &&
+                formularioUsuario.get('username')?.invalid
+              "
+            >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('username')?.errors?.['required']"
+                >* Inserta nombre de usuario</small
+              >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('username')?.errors?.['minlength']"
+                >* El nombre de usuario debe tener al menos 3 caracteres</small
+              >
+              <small
+                class="text-error"
+                *ngIf="
+                  formularioUsuario.get('username')?.invalid &&
+                  formularioUsuario.get('username')?.touched
+                "
+                >* Por favor, ingresa solo letras, números y espacios en
+                blanco.</small
+              >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Contraseña <span>*</span>:</label>
+          </td>
+          <td>
+            <input type="password" formControlName="password" id="password" />
+            <div
+              *ngIf="
+                formularioUsuario.get('password')?.touched &&
+                formularioUsuario.get('password')?.invalid
+              "
+            >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('password')?.errors?.['required']"
+                >* Inserta contraseña</small
+              >
+              <small
+                class="text-error"
+                *ngIf="formularioUsuario.get('password')?.errors?.['minlength']"
+                >* El password debe tener al menos 6 caracteres</small
+              >
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="confirmPassword"
+              >Confirmar Password:<span>*</span>:</label
+            >
+          </td>
+          <td>
+            <input
+              type="password"
+              formControlName="confirmPass"
+              id="confirmPass"
+              class="form-control"
+            />
+            <div *ngIf="passMensa" class="text-danger">
+              <p>Las contraseñas no coinciden, Inténtalo de nuevo.</p>
+            </div>
+          </td>
+        </tr>
+
+        ///
+        <tr>
+          <td><label for="direccion">Dirección:</label></td>
+          <td>
+            <input
+              type="text"
+              formControlName="direccion"
+              id="direccion"
+              pattern="[A-Za-z0-9\s]+"
+            />
+          </td>
+          <small
+            class="text-error"
+            *ngIf="
+              formularioUsuario.get('direccion')?.invalid &&
+              formularioUsuario.get('direccion')?.touched
+            "
+            >* Por favor, ingresa solo letras, números y espacios en
+            blanco.</small
+          >
+        </tr>
+        <tr>
+          <td><label for="poblacion">Población:</label></td>
+          <td>
+            <input
+              type="text"
+              formControlName="poblacion"
+              id="poblacion"
+              pattern="[A-Za-z0-9\s]+"
+            />
+          </td>
+          <small
+            class="text-error"
+            *ngIf="
+              formularioUsuario.get('poblacion')?.invalid &&
+              formularioUsuario.get('poblacion')?.touched
+            "
+            >* Por favor, ingresa solo letras, números y espacios en
+            blanco.</small
+          >
+        </tr>
+        <tr>
+          <td><label for="telefono">Teléfono:</label></td>
+          <td>
+            <input
+              type="text"
+              formControlName="telefono"
+              id="telefono"
+              pattern="[0-9]+"
+            />
+          </td>
+          <small
+            class="text-error"
+            *ngIf="
+              formularioUsuario.get('telefono')?.invalid &&
+              formularioUsuario.get('telefono')?.touched
+            "
+            >* Por favor, ingresa al menos 6 números.</small
+          >
+        </tr>
+        <tr></tr>
+      </table>
+
+      <td>
+        <button type="submit" [disabled]="formularioUsuario.invalid">
+          Crear Usuario
+        </button>
+      </td>
+
+      <small class="text-creado" *ngIf="mensajeUsuarioCreado">{{
+        mensajeUsuarioCreado
+      }}<br></small>
+      <small class="text-error" *ngIf="mensajeDNIregistrado">{{
+        mensajeDNIregistrado
+      }}<br></small>
+
+      <br /><br />
+
+      <ul *ngIf="usuarioCreado">
+        <li>
+          <a
+            (click)="volver()"
+            style="cursor: pointer; color: blue; text-decoration: underline"
+          >
+            Volver a Inicio
+          </a>
+        </li>
+      </ul>
+    </form>
+  </fieldset>
+</div>
